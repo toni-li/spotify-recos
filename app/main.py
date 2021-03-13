@@ -6,7 +6,7 @@
 
 
 from flask import Flask, render_template, request
-import .process_data
+from .process_data import process
 
 
 app = Flask(__name__)

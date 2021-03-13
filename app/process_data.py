@@ -3,17 +3,16 @@
 # https://developer.spotify.com/console/get-playlist-tracks/
 # https://developer.spotify.com/console/get-track/
 
-import sys
-import spotipy
-import spotipy.util as util
-
-scope = 'playlist-read-private, playlist-read-collaborative'
-
-util.prompt_for_user_token("toni1li131",scope,client_id='4300c682d48b480d96478da07107ca59',client_secret='5a034c056898492b966e34c01a995d28',redirect_uri='https://oauth.pstmn.io/v1/browser-callback')
-
 
 def process(user_id, song):
     import requests
+    import sys
+    import spotipy
+    import spotipy.util as util
+
+    scope = 'playlist-read-private, playlist-read-collaborative'
+
+    util.prompt_for_user_token("toni1li131",scope,client_id='4300c682d48b480d96478da07107ca59',client_secret='5a034c056898492b966e34c01a995d28',redirect_uri='https://oauth.pstmn.io/v1/browser-callback')
 
     # SETTINGS
     # refreshing token
