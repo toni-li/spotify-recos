@@ -18,15 +18,16 @@ def process(user_id, song):
   import spotipy
   import spotipy.util as util
 
-  scope = 'playlist-read-private, playlist-read-collaborative'
-
-  util.prompt_for_user_token("toni1li131",scope,client_id='4300c682d48b480d96478da07107ca59',client_secret='5a034c056898492b966e34c01a995d28',redirect_uri='https://oauth.pstmn.io/v1/browser-callback')
+  # scope = 'playlist-read-private, playlist-read-collaborative'
+  # util.prompt_for_user_token("toni1li131",scope,client_id='4300c682d48b480d96478da07107ca59',client_secret='5a034c056898492b966e34c01a995d28',redirect_uri='https://oauth.pstmn.io/v1/browser-callback')
 
   # SETTINGS
   # refreshing token
-  token = util.prompt_for_user_token("toni1li131", scope)
+  #token = util.prompt_for_user_token("toni1li131", scope)
   #print(token)
   #user_id = "toni1li131"
+
+  token = "BQB1Tihi4CAORU4IpHyxtITS9c2ZQh3DE790br5l-qZc3fd2Ptvf11TamqicPfB3k2YOhEzSnXd9GfYIrTSaGKTJPpR8uF8GXpKQyKNggd1WgWAQjusUbWlHWlo6w8N5F8oVd4LH2J5NhPpcMRGyiiUHxmqBsRqcrg67VV8mX9pDVW5txZtLBEz7DJbAdCgVBV75jiaNqUNHdPd832vJSu3Ahw"
 
   # ------------------ getting list of playlists from user ---------------------- #
   # PERFORM THE QUERY
