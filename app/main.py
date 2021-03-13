@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 def process(user_id, song):
   import requests
-    import sys
+    #import sys
     import spotipy
     import spotipy.util as util
 
