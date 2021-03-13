@@ -6,11 +6,11 @@
     <title> Spotify Song Recommender </title>
 </head>
 <body>
-    <h1> Spotify Song Recommender </h1>
-    <h2 id="subtext"> Do you have a song that you want to recommend <br> to a song but don't know if they already know it?</h2>
+    <h1> Spotify Recos </h1>
+    <h2 id="subtext"> Do you have a song that you want to recommend <br> to someone but don't know if they've already heard it?</h2>
     <div class="titles">
         <form action="{{ url_for('get_data') }}" method="POST">
-            <label for="user-name"> Spotify Username: </label>
+            <label for="user-name"> Their Spotify Username: </label>
             <input name="user-name">
             <br><br>
             <label for="song"> URL of the song you want to recommend: </label>
