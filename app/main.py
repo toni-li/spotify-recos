@@ -25,8 +25,7 @@ def get_data():
     print("Spotify Username: " + username)
     print("URL of the song you want to recommend: " + song)
 
-    # message = process_data.process(username, song)
-    message = "does this even work?"
+    message = process_data.process(username, song)
 
     return render_template('success.html', message=message)
 
