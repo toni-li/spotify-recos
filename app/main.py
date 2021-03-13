@@ -6,7 +6,7 @@
 
 
 from flask import Flask, render_template, request
-from .process_data import process_data
+#from .process_data import process_data
 
 
 app = Flask(__name__)
@@ -25,7 +25,8 @@ def get_data():
     print("Spotify Username: " + username)
     print("URL of the song you want to recommend: " + song)
 
-    message = process_data.process(username, song)
+    # message = process_data.process(username, song)
+    message = "does this even work?"
 
     return render_template('success.html', message=message)
 
