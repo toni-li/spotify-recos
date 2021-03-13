@@ -6,11 +6,16 @@
 
 
 from flask import Flask, render_template, request
-from .process_data import process
+#from .process_data import process
 
 
 app = Flask(__name__)
 
+
+def process(user_id, song):
+  message = user_id + " " + song
+
+  return(message)
 
 @app.route("/")
 def home():
