@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+    <title> Spotify Song Recommender </title>
+</head>
+<body>
+    <h1> Spotify Song Recommender </h1>
+    <h2 id="subtext"> Do you have a song that you want to recommend <br> to a song but don't know if they already know it?</h2>
+    <div class="titles">
+        <form action="{{ url_for('get_data') }}" method="POST">
+            <label for="user-name"> Spotify Username: </label>
+            <input name="user-name">
+            <br><br>
+            <label for="song"> URL of the song you want to recommend: </label>
+            <input name="song">
+            <br><br>
+            <input type="submit" id="submit-button" value="Check Song">
+        </form>
+    </div>
+</body>
+</html>
