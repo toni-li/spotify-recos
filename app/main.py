@@ -6,7 +6,7 @@
 
 
 from flask import Flask, render_template, request
-import .process_data
+from .process_data import process_data
 
 
 app = Flask(__name__)
@@ -30,8 +30,8 @@ def get_data():
     return render_template('success.html', message=message)
 
 
-if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+# if __name__ == "__main__":
+#     app.run(port=5000, debug=True)
 
 
 
