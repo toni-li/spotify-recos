@@ -27,7 +27,7 @@ def process(user_id, song):
   #print(token)
   #user_id = "toni1li131"
 
-  token = "BQDh3y8bUoNjaexvKNRPdV86GJA1L_A9aYTsbZfQMktysgtw6fusMQj6mbXqvNDDNbalDJCJ5YnmWRRTNUThFN_4k7n148L0SlRy6Ms9tnsgvxKO2pv1rpmvXk60yFrdszqfMF4JDk8BJjf4Mt_4mODo7Av8m5tO8SXkkig6p4B0Q4pVGOc7_1S4UKCBY5llB3"
+  token = "BQD_J5OtHtFtkKQ8yfptGPFiJ1w-1iuDzvGHd8c_9hZP6IcuXmcBkP11d4_sF5qDyZ0-jF-yjRoro2I2GNyzMwyZ7JDdg9T0mokr9hMCkRO-kNYoKOLpU2Kvh86olU1BfevgE3wFn-At50eo7vznMTMtWmmqpUi7tDVzeWvyosONbh1s67x-zBFfIHQuyUuUSCT0XY619USBTbtjQ9f6Co765A"
 
   # ------------------ getting list of playlists from user ---------------------- #
   # PERFORM THE QUERY
