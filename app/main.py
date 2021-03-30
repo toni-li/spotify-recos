@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, g
+import urllib.parse import quote
 
 # ------------------ refreshing authorization token ---------------------- #
 AUTHORIZATION_HEADER = ""
