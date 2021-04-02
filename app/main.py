@@ -1,11 +1,19 @@
-from flask import Flask, render_template, request, redirect, g
+import os
+from flask import Flask, render_template, redirect, g, request
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
+import json
+import requests
 from urllib.parse import quote
+import requests
+import sys
+import spotipy.util as util
 
 # ------------------ refreshing authorization token ---------------------- #
 AUTHORIZATION_HEADER = ""
 # Client Keys
 CLIENT_ID = "4300c682d48b480d96478da07107ca59"
-CLIENT_SECRET = "5a034c056898492b966e34c01a995d28"
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 
 # Server-side Parameters
 SHOW_DIALOG_bool = True
@@ -16,19 +24,49 @@ REDIRECT_URI = "https://spotify-recos.herokuapp.com/callback/q"
 auth_query_parameters = {
     "response_type": "code",
     "redirect_uri": REDIRECT_URI,
-    "scope": "playlist-read-private",
+    "scope": "playlist-read-private playlist-read-collaborative",
     "client_id": CLIENT_ID
 }
 
 app = Flask(__name__)
 
+@app.route("/")
+def index():
+    return render_template('index.html')
 
-def process(user_id, song):
-    import requests
-    import sys
-    import spotipy
-    import spotipy.util as util
+@app.route("/login")
+def auth():
 
+    url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
+    auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
+    return redirect(auth_url)
+
+@app.route("/callback/q", methods=['GET', 'POST'])
+def callback():
+    auth_token = request.args['code']
+    code_payload = {
+        "grant_type": "authorization_code",
+        "code": str(auth_token),
+        "redirect_uri": REDIRECT_URI,
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET,
+    }
+    post_request = requests.post(
+        "https://accounts.spotify.com/api/token", data=code_payload)
+
+    response_data = json.loads(post_request.text)
+    access_token = response_data["access_token"]
+    refresh_token = response_data["refresh_token"]
+    token_type = response_data["token_type"]
+    expires_in = response_data["expires_in"]
+
+    global AUTHORIZATION_HEADER    # Needed to modify global copy of globvar
+    AUTHORIZATION_HEADER = {"Authorization": "Bearer {}".format(access_token)}
+
+    return render_template("web-app.html", token=access_token)
+
+@app.route('/get_data', methods=['POST'])
+def process(user_id, song, token):
     # ------------------ getting list of playlists from user ---------------------- #
     # PERFORM THE QUERY
     query = "https://api.spotify.com/v1/users/" + user_id + "/playlists"
@@ -93,54 +131,15 @@ def process(user_id, song):
 
     return(message)
 
-
-@app.route("/")
-def home():
-    return render_template('index.html')
-
-
-@app.route("/login")
-def auth():
-    url_args = "&".join(["{}={}".format(key, quote(val))
-                        for key, val in auth_query_parameters.items()])
-    auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
-    return redirect(auth_url)
-
-
-@app.route("/callback/q", methods=['GET', 'POST'])
-def callback():
-    auth_token = request.args['code']
-    code_payload = {
-        "grant_type": "authorization_code",
-        "code": str(auth_token),
-        "redirect_uri": REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
-    }
-    post_request = requests.post(
-        "https://accounts.spotify.com/api/token", data=code_payload)
-
-    response_data = json.loads(post_request.text)
-    access_token = response_data["access_token"]
-    refresh_token = response_data["refresh_token"]
-    token_type = response_data["token_type"]
-    expires_in = response_data["expires_in"]
-
-    global AUTHORIZATION_HEADER    # Needed to modify global copy of globvar
-    AUTHORIZATION_HEADER = {"Authorization": "Bearer {}".format(access_token)}
-
-    return render_template("web-app.html")
-
-
-@app.route('/get_data', methods=['POST'])
 def get_data():
     username = request.form['user-name']
     song = request.form['song']
+    token = request.form['token']
 
     print("Spotify Username: " + username)
     print("URL of the song you want to recommend: " + song)
 
-    message = process(username, song)
+    message = process(username, song, token)
 
     return render_template('success.html', message=message)
 
