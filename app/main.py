@@ -40,7 +40,7 @@ def auth():
     auth_url = "https://accounts.spotify.com/authorize?client_id=4300c682d48b480d96478da07107ca59&response_type=code&redirect_uri=https%3A%2F%2Fspotify-recos.herokuapp.com%2Fcallback&scope=playlist-read-private%20playlist-read-collaborative"
     return redirect(auth_url)
 
-@app.route("/callback/q", methods=['GET','POST']) 
+@app.route("/callback", methods=['GET','POST']) 
 def callback():
     auth_token = request.args['code']
     code_payload = {
