@@ -46,7 +46,7 @@ def auth():
 
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def all_routes(text):
-    if text.startswith('https://spotify-recos.herokuapp.com/callback'):
+    if text == "callback":
         auth_token = request.args['code']
         code_payload = {
             "grant_type": "authorization_code",
