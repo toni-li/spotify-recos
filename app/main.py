@@ -46,7 +46,6 @@ def auth():
 
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def all_routes(text):
-    print(text, file=sys.stdout)
     if text.startswith('https://spotify-recos.herokuapp.com/callback'):
         auth_token = request.args['code']
         code_payload = {
@@ -70,7 +69,7 @@ def all_routes(text):
 
         return render_template("web-app.html")
     else:
-        return render_template("index.html")
+        return render_template("index.html", text=text)
 
 
 if __name__ == "__main__":
