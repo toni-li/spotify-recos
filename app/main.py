@@ -5,7 +5,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import requests
 from urllib.parse import quote
-
+import sys
 
 AUTHORIZATION_HEADER = ""
 #  Client Keys
@@ -46,7 +46,7 @@ def auth():
 
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def all_routes(text):
-    print(text, file=sys.stderr)
+    print(text, file=sys.stdout)
     if text.startswith('https://spotify-recos.herokuapp.com/callback'):
         auth_token = request.args['code']
         code_payload = {
