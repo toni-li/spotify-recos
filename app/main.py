@@ -19,7 +19,7 @@ CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
 SHOW_DIALOG_bool = True
 SHOW_DIALOG_str = str(SHOW_DIALOG_bool).lower()
 
-REDIRECT_URI = "https://spotify-recos.herokuapp.com/callback/q"
+REDIRECT_URI = "https://spotify-recos.herokuapp.com/callback/"
 
 auth_query_parameters = {
     "response_type": "code",
@@ -41,7 +41,7 @@ def auth():
     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
     return redirect(auth_url)
 
-@app.route("/callback/q", methods=['GET', 'POST'])
+@app.route("/callback/", methods=['GET', 'POST'])
 def callback():
     auth_token = request.args['code']
     code_payload = {
