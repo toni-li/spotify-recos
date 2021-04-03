@@ -47,7 +47,7 @@ def route(text):
         url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
         auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
         return redirect(auth_url)
-    else if "callback" in text:
+    elif "callback" in text:
         auth_token = request.args['code']
         code_payload = {
             "grant_type": "authorization_code",
