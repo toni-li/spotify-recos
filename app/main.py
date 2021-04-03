@@ -33,7 +33,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/login", methods=["POST"])
 def auth():
 
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
