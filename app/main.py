@@ -40,29 +40,33 @@ def auth():
     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
     return redirect(auth_url)
 
-@app.route("/callback/q", methods=['GET','POST']) 
-def callback():
-    auth_token = request.args['code']
-    code_payload = {
-        "grant_type": "authorization_code",
-        "code": str(auth_token),
-        "redirect_uri": REDIRECT_URI,
-        'client_id': CLIENT_ID,
-        'client_secret': CLIENT_SECRET,
-    }
-    post_request = requests.post("https://accounts.spotify.com/api/token", data=code_payload)
+#@app.route("/callback/q", methods=['GET','POST'])
+@app.route('/<path:text>', methods=['GET', 'POST'])
+def callback_route(text):
+    if text.startswith('callback'):
+        auth_token = request.args['code']
+        code_payload = {
+            "grant_type": "authorization_code",
+            "code": str(auth_token),
+            "redirect_uri": REDIRECT_URI,
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET,
+        }
+        post_request = requests.post("https://accounts.spotify.com/api/token", data=code_payload)
 
-    response_data = json.loads(post_request.text)
-    access_token = response_data["access_token"]
-    refresh_token = response_data["refresh_token"]
-    token_type = response_data["token_type"]
-    expires_in = response_data["expires_in"]
+        response_data = json.loads(post_request.text)
+        access_token = response_data["access_token"]
+        refresh_token = response_data["refresh_token"]
+        token_type = response_data["token_type"]
+        expires_in = response_data["expires_in"]
 
-    global AUTHORIZATION_HEADER    # Needed to modify global copy of globvar
-    AUTHORIZATION_HEADER  = {"Authorization": "Bearer {}".format(access_token)}
+        global AUTHORIZATION_HEADER    # Needed to modify global copy of globvar
+        AUTHORIZATION_HEADER  = {"Authorization": "Bearer {}".format(access_token)}
 
-
-    return render_template("web-app.html")
+        return render_template("web-app.html")
+    else:
+        return render_template("index.html", text=text)
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
+
