@@ -65,7 +65,7 @@ def callback_route(text):
 
         return render_template("web-app.html")
     else:
-        return render_template("index.html", text=text)
+        return redirect(url_for('index', text=text))
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
