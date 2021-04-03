@@ -5,10 +5,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import json
 import requests
 from urllib.parse import quote
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from scipy.stats import binned_statistic
 
 
 AUTHORIZATION_HEADER = ""
