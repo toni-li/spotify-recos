@@ -29,18 +29,6 @@ auth_query_parameters = {
 
 app = Flask(__name__)
 
-# @app.route("/")
-# def index():
-#     return render_template('index.html')
-
-# @app.route("/login")
-# def auth():
-
-#     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
-#     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
-#     return redirect(auth_url)
-
-#@app.route("/callback/q", methods=['GET','POST'])
 @app.route("/<path:text>", methods=['GET', 'POST'])
 def route(text):
     if "login" in text:
@@ -70,6 +58,19 @@ def route(text):
         return render_template("web-app.html")
     else:
         return render_template('index.html')
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
+# @app.route("/login")
+# def auth():
+
+#     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
+#     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
+#     return redirect(auth_url)
+
+#@app.route("/callback/q", methods=['GET','POST'])
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
