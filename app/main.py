@@ -29,21 +29,25 @@ auth_query_parameters = {
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+# @app.route("/")
+# def index():
+#     return render_template('index.html')
 
-@app.route("/login")
-def auth():
+# @app.route("/login")
+# def auth():
 
-    url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
-    auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
-    return redirect(auth_url)
+#     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
+#     auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
+#     return redirect(auth_url)
 
 #@app.route("/callback/q", methods=['GET','POST'])
 @app.route("/<path:text>", methods=['GET', 'POST'])
-def callback(text):
-    if "callback" in text:
+def route(text):
+    if "login" in text:
+        url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
+        auth_url = "{}/?{}".format("https://accounts.spotify.com/authorize", url_args)
+        return redirect(auth_url)
+    else if "callback" in text:
         auth_token = request.args['code']
         code_payload = {
             "grant_type": "authorization_code",
@@ -65,7 +69,7 @@ def callback(text):
 
         return render_template("web-app.html")
     else:
-        return redirect(url_for('index', text=text))
+        return render_template('index.html')
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
