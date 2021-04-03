@@ -41,8 +41,8 @@ def auth():
     return redirect(auth_url)
 
 #@app.route("/callback/q", methods=['GET','POST'])
-@app.route('/<path:text>', methods=['GET', 'POST'])
-def callback_route(text):
+@app.route("/<path:text>", methods=['GET', 'POST'])
+def callback(text):
     if "callback" in text:
         auth_token = request.args['code']
         code_payload = {
