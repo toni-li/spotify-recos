@@ -43,7 +43,7 @@ def auth():
 #@app.route("/callback/q", methods=['GET','POST'])
 @app.route('/<path:text>', methods=['GET', 'POST'])
 def callback_route(text):
-    if text.startswith('callback'):
+    if "callback" in text:
         auth_token = request.args['code']
         code_payload = {
             "grant_type": "authorization_code",
