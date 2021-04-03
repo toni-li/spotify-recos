@@ -23,7 +23,7 @@ SPOTIFY_API_URL = "{}/{}".format(SPOTIFY_API_BASE_URL, API_VERSION)
 
 # Server-side Parameters
 CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
-REDIRECT_URI = "{}/callback/q".format(CLIENT_SIDE_URL)
+REDIRECT_URI = "{}/callback/".format(CLIENT_SIDE_URL)
 SCOPE = "playlist-modify-public playlist-modify-private"
 STATE = ""
 SHOW_DIALOG_bool = True
@@ -46,7 +46,7 @@ def index():
     return redirect(auth_url)
 
 
-@app.route("/callback/q?code=AQDExtJX93AkQ_sTIURHWnZ-oSDHVr7Klv4jQ1m19vfgtNbds9JInCzGzSR_3JLXrzYCzpyZCtlGtLUe6T7Kg5EWCHVdYU0eNCXOot49WPH0UiHd2adi99CKo0gs7EpapHQpF_F_BYBhZNdBO2m9XwiZ3DqaNJCyoJalahReaNHd0iEz8jSHzvJyWyAD6mBhY9jAIY2k73x39xyTHA40yLWOuJjOIAH7TQ-JtM5PJhzRR258h9zE44MA4W6dolNuGxvD")
+@app.route("/callback/<code>")
 def callback():
     # Auth Step 4: Requests refresh and access tokens
     auth_token = request.args['code']
