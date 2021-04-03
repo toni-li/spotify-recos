@@ -1,3 +1,4 @@
+# tutorial: https://github.com/drshrey/spotify-flask-auth-example
 import os
 import json
 from flask import Flask, request, redirect, g, render_template
@@ -23,7 +24,7 @@ SPOTIFY_API_URL = "{}/{}".format(SPOTIFY_API_BASE_URL, API_VERSION)
 
 # Server-side Parameters
 CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
-REDIRECT_URI = "{}/callback/".format(CLIENT_SIDE_URL)
+REDIRECT_URI = "{}/callback/q".format(CLIENT_SIDE_URL)
 SCOPE = "playlist-modify-public playlist-modify-private"
 STATE = ""
 SHOW_DIALOG_bool = True
@@ -46,7 +47,7 @@ def index():
     return redirect(auth_url)
 
 
-@app.route("/callback/<code>")
+@app.route("/callback/q")
 def callback():
     # Auth Step 4: Requests refresh and access tokens
     auth_token = request.args['code']
