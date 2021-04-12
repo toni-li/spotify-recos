@@ -9,7 +9,6 @@
     <h1> Spotify Recos </h1>
     <h2 id="subtext"> Do you have a song that you want to recommend <br> to someone but don't know if they've already heard it?</h2>
     <div class="titles">
-        <p> <a href="/login" class="button">Sign In With Your Spotify Account</a></p>
 
         <form action="{{ url_for('get_data') }}" method="POST">
             <label for="user-name"> Their Spotify Username: </label>
@@ -18,7 +17,7 @@
             <label for="song"> URL of the song you want to recommend: </label>
             <input name="song">
             <br><br>
-            <p id="token"> {{token}} </p>
+            <!-- <p id="token"> {{token}} </p> -->
             <input type="submit" id="submit-button" value="Check Song">
         </form>
 
