@@ -94,6 +94,7 @@ def process(user_id, song, token):
 
 
 app = Flask(__name__)
+app.secret_key = "efJ1n5a2Gx"
 
 #  Client Keys
 CLIENT_ID = "4300c682d48b480d96478da07107ca59"
@@ -154,8 +155,11 @@ def callback():
     # Auth Step 5: Tokens are Returned to Application
     response_data = json.loads(post_request.text)
     print(response_data)
-    global access_token
+    #global access_token
     access_token = response_data["access_token"]
+
+    session["access_token"]=access_token
+
     refresh_token = response_data["refresh_token"]
     token_type = response_data["token_type"]
     expires_in = response_data["expires_in"]
@@ -173,6 +177,9 @@ def get_data():
 
     print("Spotify Username: " + username)
     print("URL of the song you want to recommend: " + song)
+
+    access_token = session.get("access_token", None)
+    print("Token:" + str(access_token))
 
     message = process(username, song, access_token)
 
