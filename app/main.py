@@ -1,7 +1,7 @@
 # tutorial: https://github.com/drshrey/spotify-flask-auth-example
 import os
 import json
-from flask import Flask, request, redirect, g, render_template
+from flask import Flask, request, redirect, g, render_template, session
 import requests
 from urllib.parse import quote
 
