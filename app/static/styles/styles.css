@@ -23,7 +23,7 @@ a {
     text-decoration: none;
     color: black;
 }
-#subtext {
+#subtext, #welcome-message {
     text-align: center;
     color:white;
     font-family: 'Roboto', sans-serif;
