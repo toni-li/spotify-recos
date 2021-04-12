@@ -94,7 +94,7 @@ def process(user_id, song, token):
 
 
 app = Flask(__name__)
-app.secret_key = "efJ1n5a2Gx"
+app.secret_key = os.environ.get("APP_KEY")
 
 #  Client Keys
 CLIENT_ID = "4300c682d48b480d96478da07107ca59"
