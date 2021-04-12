@@ -15,7 +15,6 @@ app = Flask(__name__)
 #  Client Keys
 CLIENT_ID = "4300c682d48b480d96478da07107ca59"
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-print("CLIENT_SECRET: " + str(CLIENT_SECRET)) 
 
 # Spotify URLS
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
@@ -25,10 +24,11 @@ API_VERSION = "v1"
 SPOTIFY_API_URL = "{}/{}".format(SPOTIFY_API_BASE_URL, API_VERSION)
 
 # Server-side Parameters
-#CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
-CLIENT_SIDE_URL = "http://127.0.0.1"
+CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
+#CLIENT_SIDE_URL = "http://127.0.0.1"
 PORT = 8080
-REDIRECT_URI = "{}:{}/callback/q".format(CLIENT_SIDE_URL, PORT)
+#REDIRECT_URI = "{}:{}/callback/q".format(CLIENT_SIDE_URL, PORT)
+REDIRECT_URI = "{}/callback/q".format(CLIENT_SIDE_URL)
 SCOPE = "playlist-read-private playlist-read-collaborative"
 STATE = ""
 SHOW_DIALOG_bool = True
