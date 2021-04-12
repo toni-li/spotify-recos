@@ -14,6 +14,7 @@ app = Flask(__name__)
 #  Client Keys
 CLIENT_ID = "4300c682d48b480d96478da07107ca59"
 CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+print("Client Secret: " + str(CLIENT_SECRET))
 
 # Spotify URLS
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
@@ -23,11 +24,11 @@ API_VERSION = "v1"
 SPOTIFY_API_URL = "{}/{}".format(SPOTIFY_API_BASE_URL, API_VERSION)
 
 # Server-side Parameters
-CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
-#CLIENT_SIDE_URL = "http://127.0.0.1"
+#CLIENT_SIDE_URL = "https://spotify-recos.herokuapp.com"
+CLIENT_SIDE_URL = "http://127.0.0.1"
 PORT = 8080
-#REDIRECT_URI = "{}:{}/callback/q".format(CLIENT_SIDE_URL, PORT)
-REDIRECT_URI = "https://spotify-recos.herokuapp.com/callback/q" 
+REDIRECT_URI = "{}:{}/callback/q".format(CLIENT_SIDE_URL, PORT)
+#REDIRECT_URI = "https://spotify-recos.herokuapp.com/callback/q" 
 SCOPE = "playlist-read-private playlist-read-collaborative"
 STATE = ""
 SHOW_DIALOG_bool = True
@@ -81,7 +82,6 @@ def callback():
 
     return render_template("web-app.html")
 
-@app.route('/get_data', methods=['POST'])
 def process(user_id, song, token):
     import requests
     import sys
@@ -165,6 +165,7 @@ def process(user_id, song, token):
 
     return(message)
 
+@app.route('/get_data', methods=['POST'])
 def get_data():
     username = request.form['user-name']
     song = request.form['song']
