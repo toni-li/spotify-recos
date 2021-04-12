@@ -41,11 +41,14 @@ auth_query_parameters = {
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+@app.route("/login")
+def login():
     # Auth Step 1: Authorization
     url_args = "&".join(["{}={}".format(key, quote(val)) for key, val in auth_query_parameters.items()])
     auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
     return redirect(auth_url)
-
 
 @app.route("/callback/q")
 def callback():
